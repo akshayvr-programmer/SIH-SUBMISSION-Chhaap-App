@@ -1,0 +1,35 @@
+# Chhaap backend dependencies
+#
+# IMPORTANT: reconcile this against your actual environment before submitting.
+# From your backend folder, run:  pip freeze > requirements.txt
+# then keep the versions below as a reference for the key ML pins that matter.
+#
+# The versions marked "# pinned" were chosen deliberately during the build and
+# should not be bumped casually.
+
+# --- Web / API ---
+fastapi
+uvicorn[standard]
+python-multipart
+psycopg[binary]
+pydantic
+
+# --- AI ---
+anthropic
+
+# --- Vision / embeddings ---
+transformers
+torch
+pillow
+
+# --- Background removal ---
+rembg
+onnxruntime-gpu==1.26.0   # pinned: last CUDA-12 build; newer builds target CUDA 13
+nvidia-cudnn-cu12         # provides the cuDNN DLLs onnxruntime-gpu needs
+
+# --- Speech-to-text ---
+faster-whisper
+
+# --- Utilities ---
+numpy
+requests

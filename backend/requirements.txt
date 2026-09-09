@@ -1,0 +1,28 @@
+fastapi==0.115.6
+uvicorn[standard]==0.34.0
+python-multipart==0.0.20
+pydantic==2.10.4
+pydantic-settings==2.7.0
+sqlalchemy==2.0.36
+psycopg[binary]==3.2.3
+pgvector==0.3.6
+alembic==1.14.0
+celery[redis]==5.4.0
+redis==5.2.1
+boto3==1.35.90
+httpx==0.28.1
+
+# role 3 - vision
+opencv-python-headless==4.10.0.84
+onnxruntime==1.20.1
+pillow==11.0.0
+rembg==2.0.60          # fallback only; ship your own ONNX for on-device parity
+
+# role 4 - language and pricing
+faster-whisper==1.1.0
+transformers==4.47.1
+sentence-transformers==3.3.1
+open-clip-torch==2.29.0
+scikit-learn==1.6.0
+numpy==2.2.1
+pandas==2.2.3

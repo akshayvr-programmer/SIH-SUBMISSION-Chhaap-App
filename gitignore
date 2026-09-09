@@ -1,0 +1,102 @@
+# ==========================================================
+# SECRETS — never commit these
+# ==========================================================
+.env
+.env.*
+*.env
+**/.env
+*.key
+*.pem
+secrets.json
+**/serviceAccount*.json
+# Anything that looks like a key dump
+*apikey*
+*api_key*
+*credentials*
+
+# ==========================================================
+# Python / backend
+# ==========================================================
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+.venv/
+env/
+ENV/
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ipynb_checkpoints/
+
+# ==========================================================
+# ML model weights & large artifacts
+# (keep the repo light; document how to fetch instead)
+# ==========================================================
+*.onnx
+*.pt
+*.pth
+*.bin
+*.gguf
+*.safetensors
+*.ckpt
+models/
+weights/
+.cache/
+*.u2net*
+# rembg / whisper / huggingface caches
+.u2net/
+whisper_models/
+
+# ==========================================================
+# Node / Expo / React Native
+# ==========================================================
+node_modules/
+.expo/
+.expo-shared/
+dist/
+web-build/
+*.jks
+*.p8
+*.p12
+*.mobileprovision
+*.orig.*
+npm-debug.*
+yarn-error.*
+.metro-health-check*
+
+# ==========================================================
+# Databases / local data
+# ==========================================================
+*.sqlite
+*.sqlite3
+*.db
+pgdata/
+postgres-data/
+
+# ==========================================================
+# Uploads / generated media (regenerate at runtime)
+# ==========================================================
+uploads/
+tmp/
+temp/
+*.tmp
+
+# ==========================================================
+# OS / editor
+# ==========================================================
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# ==========================================================
+# Logs
+# ==========================================================
+*.log
+logs/

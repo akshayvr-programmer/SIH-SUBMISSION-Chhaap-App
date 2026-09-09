@@ -1,0 +1,1332 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Chhaap API",
+    "description": "Market linkage and smart cataloging for marginalized artisans. SIH26090, Ministry of Social Justice and Empowerment.\n\n**Every response below is stubbed.** Shapes are final; values are not.",
+    "version": "0.1.0-stub"
+  },
+  "paths": {
+    "/health": {
+      "get": {
+        "tags": [
+          "ops"
+        ],
+        "summary": "Health",
+        "operationId": "health_health_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": true,
+                  "type": "object",
+                  "title": "Response Health Health Get"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/vision/enhance": {
+      "post": {
+        "tags": [
+          "vision"
+        ],
+        "summary": "Enhance",
+        "description": "Cut out, relight, and standardise a product photo.\n\nThe phone runs this locally when offline; this endpoint is the online\nmirror and the path for older devices that cannot hold the model.",
+        "operationId": "enhance_v1_vision_enhance_post",
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/Body_enhance_v1_vision_enhance_post"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EnhanceResult"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/vision/classify": {
+      "post": {
+        "tags": [
+          "vision"
+        ],
+        "summary": "Classify",
+        "description": "Identify the craft tradition and flag a registered GI where one exists.",
+        "operationId": "classify_v1_vision_classify_post",
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/Body_classify_v1_vision_classify_post"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ClassifyResult"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/listing/transcribe": {
+      "post": {
+        "tags": [
+          "listing"
+        ],
+        "summary": "Transcribe",
+        "description": "Turn an artisan's spoken description into text, in their language and English.",
+        "operationId": "transcribe_v1_listing_transcribe_post",
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/Body_transcribe_v1_listing_transcribe_post"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TranscribeResult"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/listing/generate": {
+      "post": {
+        "tags": [
+          "listing"
+        ],
+        "summary": "Generate",
+        "description": "Write the listing, grounded on the craft glossary and the GI registry.",
+        "operationId": "generate_v1_listing_generate_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ListingRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListingResult"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/pricing/estimate": {
+      "post": {
+        "tags": [
+          "pricing"
+        ],
+        "summary": "Estimate",
+        "description": "Price from evidence: nearest comparables, a cost floor, and a season factor.\n\nContract note for the client: when confidence is `floor_only`, `comparables`\nwill be empty and the UI must present the number as a floor, not a market\nprice. Never render `recommended_inr` without the evidence beside it.",
+        "operationId": "estimate_v1_pricing_estimate_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PricingRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PricingResult"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/publish/{channel}": {
+      "post": {
+        "tags": [
+          "publish"
+        ],
+        "summary": "Publish",
+        "description": "Emit the catalog artifact for one channel.\n\nondc      -> Beckn-protocol catalog JSON\ngem       -> GeM bulk upload CSV\nwhatsapp  -> WhatsApp Business catalog item\nmicrosite -> public product page plus QR",
+        "operationId": "publish_v1_publish__channel__post",
+        "parameters": [
+          {
+            "name": "channel",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/Channel"
+            }
+          },
+          {
+            "name": "product_id",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Product Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PublishResult"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/sync/outbox": {
+      "post": {
+        "tags": [
+          "sync"
+        ],
+        "summary": "Sync Outbox",
+        "description": "Accept a batch of products the phone created while offline.\n\nIdempotent on `client_id`. Replaying the same batch returns the same\nproduct ids and does not duplicate rows.",
+        "operationId": "sync_outbox_v1_sync_outbox_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OutboxRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OutboxResult"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/jobs/{job_id}": {
+      "get": {
+        "tags": [
+          "sync"
+        ],
+        "summary": "Job Status",
+        "description": "Poll enrichment progress for a synced product.",
+        "operationId": "job_status_v1_jobs__job_id__get",
+        "parameters": [
+          {
+            "name": "job_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Job Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Job"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Body_classify_v1_vision_classify_post": {
+        "properties": {
+          "image": {
+            "type": "string",
+            "contentMediaType": "application/octet-stream",
+            "title": "Image"
+          }
+        },
+        "type": "object",
+        "required": [
+          "image"
+        ],
+        "title": "Body_classify_v1_vision_classify_post"
+      },
+      "Body_enhance_v1_vision_enhance_post": {
+        "properties": {
+          "image": {
+            "type": "string",
+            "contentMediaType": "application/octet-stream",
+            "title": "Image",
+            "description": "Raw camera capture, JPEG or PNG."
+          },
+          "background": {
+            "type": "string",
+            "title": "Background",
+            "default": "white"
+          },
+          "on_device": {
+            "type": "boolean",
+            "title": "On Device",
+            "default": false
+          }
+        },
+        "type": "object",
+        "required": [
+          "image"
+        ],
+        "title": "Body_enhance_v1_vision_enhance_post"
+      },
+      "Body_transcribe_v1_listing_transcribe_post": {
+        "properties": {
+          "audio": {
+            "type": "string",
+            "contentMediaType": "application/octet-stream",
+            "title": "Audio",
+            "description": "Voice note, wav or m4a."
+          },
+          "product_id": {
+            "type": "string",
+            "title": "Product Id"
+          },
+          "source_language": {
+            "$ref": "#/components/schemas/Language",
+            "default": "hi"
+          }
+        },
+        "type": "object",
+        "required": [
+          "audio",
+          "product_id"
+        ],
+        "title": "Body_transcribe_v1_listing_transcribe_post"
+      },
+      "Channel": {
+        "type": "string",
+        "enum": [
+          "ondc",
+          "gem",
+          "whatsapp",
+          "microsite"
+        ],
+        "title": "Channel"
+      },
+      "ClassifyResult": {
+        "properties": {
+          "product_id": {
+            "type": "string",
+            "title": "Product Id"
+          },
+          "candidates": {
+            "items": {
+              "$ref": "#/components/schemas/CraftCandidate"
+            },
+            "type": "array",
+            "title": "Candidates"
+          },
+          "ms_elapsed": {
+            "type": "integer",
+            "title": "Ms Elapsed"
+          }
+        },
+        "type": "object",
+        "required": [
+          "product_id",
+          "candidates",
+          "ms_elapsed"
+        ],
+        "title": "ClassifyResult"
+      },
+      "Comparable": {
+        "properties": {
+          "title": {
+            "type": "string",
+            "title": "Title"
+          },
+          "price_inr": {
+            "type": "integer",
+            "title": "Price Inr"
+          },
+          "craft": {
+            "type": "string",
+            "title": "Craft"
+          },
+          "source": {
+            "type": "string",
+            "title": "Source",
+            "examples": [
+              "GeM",
+              "ONDC",
+              "Etsy"
+            ]
+          },
+          "url": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Url"
+          },
+          "similarity": {
+            "type": "number",
+            "maximum": 1.0,
+            "minimum": 0.0,
+            "title": "Similarity"
+          }
+        },
+        "type": "object",
+        "required": [
+          "title",
+          "price_inr",
+          "craft",
+          "source",
+          "similarity"
+        ],
+        "title": "Comparable"
+      },
+      "CostFloor": {
+        "properties": {
+          "material_inr": {
+            "type": "integer",
+            "title": "Material Inr"
+          },
+          "labour_hours": {
+            "type": "number",
+            "title": "Labour Hours"
+          },
+          "wage_rate_inr_per_hour": {
+            "type": "integer",
+            "title": "Wage Rate Inr Per Hour"
+          },
+          "wage_basis": {
+            "type": "string",
+            "title": "Wage Basis",
+            "examples": [
+              "Gujarat scheduled employment minimum wage, skilled, 2026"
+            ]
+          },
+          "overhead_inr": {
+            "type": "integer",
+            "title": "Overhead Inr"
+          },
+          "total_inr": {
+            "type": "integer",
+            "title": "Total Inr"
+          }
+        },
+        "type": "object",
+        "required": [
+          "material_inr",
+          "labour_hours",
+          "wage_rate_inr_per_hour",
+          "wage_basis",
+          "overhead_inr",
+          "total_inr"
+        ],
+        "title": "CostFloor"
+      },
+      "CraftCandidate": {
+        "properties": {
+          "craft": {
+            "type": "string",
+            "title": "Craft",
+            "examples": [
+              "Ajrakh block print"
+            ]
+          },
+          "confidence": {
+            "type": "number",
+            "maximum": 1.0,
+            "minimum": 0.0,
+            "title": "Confidence"
+          },
+          "region": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Region",
+            "examples": [
+              "Kutch, Gujarat"
+            ]
+          },
+          "gi_tag": {
+            "type": "boolean",
+            "title": "Gi Tag",
+            "description": "Registered Geographical Indication.",
+            "default": false
+          },
+          "gi_registration": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Gi Registration",
+            "examples": [
+              "GI 178"
+            ]
+          }
+        },
+        "type": "object",
+        "required": [
+          "craft",
+          "confidence"
+        ],
+        "title": "CraftCandidate"
+      },
+      "EnhanceResult": {
+        "properties": {
+          "product_id": {
+            "type": "string",
+            "title": "Product Id"
+          },
+          "original_url": {
+            "type": "string",
+            "title": "Original Url"
+          },
+          "enhanced_url": {
+            "type": "string",
+            "title": "Enhanced Url"
+          },
+          "mask_url": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Mask Url"
+          },
+          "background": {
+            "type": "string",
+            "title": "Background",
+            "description": "white | transparent | scene",
+            "default": "white"
+          },
+          "ms_elapsed": {
+            "type": "integer",
+            "title": "Ms Elapsed"
+          },
+          "on_device": {
+            "type": "boolean",
+            "title": "On Device",
+            "description": "True when the client did this locally and is only reporting it.",
+            "default": false
+          }
+        },
+        "type": "object",
+        "required": [
+          "product_id",
+          "original_url",
+          "enhanced_url",
+          "ms_elapsed"
+        ],
+        "title": "EnhanceResult"
+      },
+      "HTTPValidationError": {
+        "properties": {
+          "detail": {
+            "items": {
+              "$ref": "#/components/schemas/ValidationError"
+            },
+            "type": "array",
+            "title": "Detail"
+          }
+        },
+        "type": "object",
+        "title": "HTTPValidationError"
+      },
+      "Job": {
+        "properties": {
+          "job_id": {
+            "type": "string",
+            "title": "Job Id"
+          },
+          "state": {
+            "$ref": "#/components/schemas/JobState"
+          },
+          "progress": {
+            "type": "number",
+            "maximum": 1.0,
+            "minimum": 0.0,
+            "title": "Progress",
+            "default": 0.0
+          },
+          "result_url": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Result Url"
+          },
+          "error": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Error"
+          }
+        },
+        "type": "object",
+        "required": [
+          "job_id",
+          "state"
+        ],
+        "title": "Job"
+      },
+      "JobState": {
+        "type": "string",
+        "enum": [
+          "queued",
+          "running",
+          "done",
+          "failed"
+        ],
+        "title": "JobState"
+      },
+      "Language": {
+        "type": "string",
+        "enum": [
+          "en",
+          "hi",
+          "bn",
+          "gu",
+          "kn",
+          "ml",
+          "mr",
+          "or",
+          "pa",
+          "ta",
+          "te",
+          "ur"
+        ],
+        "title": "Language",
+        "description": "Languages the app accepts for voice input and emits for listings."
+      },
+      "ListingCopy": {
+        "properties": {
+          "title": {
+            "type": "string",
+            "title": "Title"
+          },
+          "bullets": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Bullets"
+          },
+          "story": {
+            "type": "string",
+            "title": "Story",
+            "description": "Provenance paragraph. Sells the premium."
+          }
+        },
+        "type": "object",
+        "required": [
+          "title",
+          "bullets",
+          "story"
+        ],
+        "title": "ListingCopy"
+      },
+      "ListingRequest": {
+        "properties": {
+          "product_id": {
+            "type": "string",
+            "title": "Product Id"
+          },
+          "transcript": {
+            "type": "string",
+            "title": "Transcript"
+          },
+          "source_language": {
+            "$ref": "#/components/schemas/Language",
+            "default": "hi"
+          },
+          "craft": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Craft"
+          },
+          "material": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Material"
+          },
+          "dimensions_cm": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Dimensions Cm",
+            "examples": [
+              "220 x 110"
+            ]
+          }
+        },
+        "type": "object",
+        "required": [
+          "product_id",
+          "transcript"
+        ],
+        "title": "ListingRequest"
+      },
+      "ListingResult": {
+        "properties": {
+          "product_id": {
+            "type": "string",
+            "title": "Product Id"
+          },
+          "en": {
+            "$ref": "#/components/schemas/ListingCopy"
+          },
+          "hi": {
+            "$ref": "#/components/schemas/ListingCopy"
+          },
+          "source": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ListingCopy"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Copy in the artisan's own language, when not hi or en."
+          },
+          "keywords": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Keywords"
+          },
+          "grounded_on": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Grounded On",
+            "description": "Glossary and GI-registry entries retrieved for this listing. Shown in the UI so the description is never an unsourced claim."
+          }
+        },
+        "type": "object",
+        "required": [
+          "product_id",
+          "en",
+          "hi",
+          "keywords"
+        ],
+        "title": "ListingResult"
+      },
+      "OutboxItem": {
+        "properties": {
+          "client_id": {
+            "type": "string",
+            "title": "Client Id",
+            "description": "UUID minted on the phone while offline."
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Created At"
+          },
+          "craft": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Craft"
+          },
+          "transcript": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Transcript"
+          },
+          "source_language": {
+            "$ref": "#/components/schemas/Language",
+            "default": "hi"
+          },
+          "image_sha256": {
+            "type": "string",
+            "title": "Image Sha256"
+          },
+          "enhanced_on_device": {
+            "type": "boolean",
+            "title": "Enhanced On Device",
+            "default": true
+          }
+        },
+        "type": "object",
+        "required": [
+          "client_id",
+          "created_at",
+          "image_sha256"
+        ],
+        "title": "OutboxItem"
+      },
+      "OutboxRequest": {
+        "properties": {
+          "artisan_id": {
+            "type": "string",
+            "title": "Artisan Id"
+          },
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/OutboxItem"
+            },
+            "type": "array",
+            "title": "Items"
+          }
+        },
+        "type": "object",
+        "required": [
+          "artisan_id",
+          "items"
+        ],
+        "title": "OutboxRequest"
+      },
+      "OutboxResult": {
+        "properties": {
+          "accepted": {
+            "items": {
+              "$ref": "#/components/schemas/SyncedItem"
+            },
+            "type": "array",
+            "title": "Accepted"
+          },
+          "rejected": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Rejected"
+          }
+        },
+        "type": "object",
+        "required": [
+          "accepted"
+        ],
+        "title": "OutboxResult"
+      },
+      "PriceConfidence": {
+        "type": "string",
+        "enum": [
+          "strong",
+          "fair",
+          "floor_only"
+        ],
+        "title": "PriceConfidence",
+        "description": "How much evidence sits behind a price band.\n\nstrong  -> 7+ close comparables\nfair    -> 3-6 comparables\nfloor_only -> under 3 comparables; only the cost floor is shown, and the\n              UI must label it as a floor rather than a market price."
+      },
+      "PricingRequest": {
+        "properties": {
+          "product_id": {
+            "type": "string",
+            "title": "Product Id"
+          },
+          "craft": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Craft"
+          },
+          "material": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Material"
+          },
+          "dimensions_cm": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Dimensions Cm"
+          },
+          "labour_hours": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Labour Hours"
+          },
+          "state": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "State",
+            "examples": [
+              "Gujarat"
+            ]
+          }
+        },
+        "type": "object",
+        "required": [
+          "product_id"
+        ],
+        "title": "PricingRequest"
+      },
+      "PricingResult": {
+        "properties": {
+          "product_id": {
+            "type": "string",
+            "title": "Product Id"
+          },
+          "recommended_inr": {
+            "type": "integer",
+            "title": "Recommended Inr"
+          },
+          "band_low_inr": {
+            "type": "integer",
+            "title": "Band Low Inr"
+          },
+          "band_high_inr": {
+            "type": "integer",
+            "title": "Band High Inr"
+          },
+          "confidence": {
+            "$ref": "#/components/schemas/PriceConfidence"
+          },
+          "cost_floor": {
+            "$ref": "#/components/schemas/CostFloor"
+          },
+          "seasonality": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Seasonality"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "comparables": {
+            "items": {
+              "$ref": "#/components/schemas/Comparable"
+            },
+            "type": "array",
+            "title": "Comparables",
+            "description": "Never empty unless confidence is floor_only. The UI must render these on the same screen as the price."
+          },
+          "explanation": {
+            "type": "string",
+            "title": "Explanation"
+          }
+        },
+        "type": "object",
+        "required": [
+          "product_id",
+          "recommended_inr",
+          "band_low_inr",
+          "band_high_inr",
+          "confidence",
+          "cost_floor",
+          "comparables",
+          "explanation"
+        ],
+        "title": "PricingResult"
+      },
+      "PublishResult": {
+        "properties": {
+          "product_id": {
+            "type": "string",
+            "title": "Product Id"
+          },
+          "channel": {
+            "$ref": "#/components/schemas/Channel"
+          },
+          "payload_url": {
+            "type": "string",
+            "title": "Payload Url",
+            "description": "The generated catalog artifact."
+          },
+          "public_url": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Public Url"
+          },
+          "qr_url": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Qr Url"
+          },
+          "published_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Published At"
+          }
+        },
+        "type": "object",
+        "required": [
+          "product_id",
+          "channel",
+          "payload_url",
+          "published_at"
+        ],
+        "title": "PublishResult"
+      },
+      "Seasonality": {
+        "properties": {
+          "window": {
+            "type": "string",
+            "title": "Window",
+            "examples": [
+              "Diwali"
+            ]
+          },
+          "multiplier": {
+            "type": "number",
+            "title": "Multiplier",
+            "examples": [
+              1.18
+            ]
+          },
+          "applies_until": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Applies Until"
+          }
+        },
+        "type": "object",
+        "required": [
+          "window",
+          "multiplier"
+        ],
+        "title": "Seasonality"
+      },
+      "SyncedItem": {
+        "properties": {
+          "client_id": {
+            "type": "string",
+            "title": "Client Id"
+          },
+          "product_id": {
+            "type": "string",
+            "title": "Product Id"
+          },
+          "job_id": {
+            "type": "string",
+            "title": "Job Id",
+            "description": "Poll /v1/jobs/{job_id} for enrichment."
+          }
+        },
+        "type": "object",
+        "required": [
+          "client_id",
+          "product_id",
+          "job_id"
+        ],
+        "title": "SyncedItem"
+      },
+      "TranscribeResult": {
+        "properties": {
+          "product_id": {
+            "type": "string",
+            "title": "Product Id"
+          },
+          "source_language": {
+            "$ref": "#/components/schemas/Language"
+          },
+          "transcript": {
+            "type": "string",
+            "title": "Transcript"
+          },
+          "transcript_en": {
+            "type": "string",
+            "title": "Transcript En"
+          },
+          "engine": {
+            "type": "string",
+            "title": "Engine",
+            "description": "bhashini | whisper"
+          },
+          "ms_elapsed": {
+            "type": "integer",
+            "title": "Ms Elapsed"
+          }
+        },
+        "type": "object",
+        "required": [
+          "product_id",
+          "source_language",
+          "transcript",
+          "transcript_en",
+          "engine",
+          "ms_elapsed"
+        ],
+        "title": "TranscribeResult"
+      },
+      "ValidationError": {
+        "properties": {
+          "loc": {
+            "items": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                }
+              ]
+            },
+            "type": "array",
+            "title": "Location"
+          },
+          "msg": {
+            "type": "string",
+            "title": "Message"
+          },
+          "type": {
+            "type": "string",
+            "title": "Error Type"
+          },
+          "input": {
+            "title": "Input"
+          },
+          "ctx": {
+            "type": "object",
+            "title": "Context"
+          }
+        },
+        "type": "object",
+        "required": [
+          "loc",
+          "msg",
+          "type"
+        ],
+        "title": "ValidationError"
+      }
+    }
+  }
+}
