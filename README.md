@@ -94,7 +94,6 @@ The interface speaks and reads back at every step, making it effortless for arti
 ## 6. Architecture
 
 See [docs/architecture.md](docs/architecture.md) for the full diagram and data flow.
-
 ---
 
 ## 7. Repository Structure
