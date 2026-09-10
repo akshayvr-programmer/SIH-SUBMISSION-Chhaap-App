@@ -1,3 +1,7 @@
+
+
+
+
 <div align="center">
 
 # छाप · Chhaap
@@ -7,6 +11,15 @@
 An AI market-linkage app that lets marginalized artisans list, price, and sell their work using nothing but their voice and their own language.
 
 Smart India Hackathon 2026 - PS **SIH26090** - Ministry of Social Justice & Empowerment
+
+---
+
+### 🎬 Product Demo
+
+https://github.com/user-attachments/assets/bcf6f26e-0c60-4d6f-b981-cfe5cb8b9f33
+
+
+*Watch how Chhaap turns a single photo and a spoken sentence into a published, multi-channel listing.*
 
 </div>
 
@@ -82,107 +95,120 @@ The interface speaks and reads back at every step, making it effortless for arti
 
 See [docs/architecture.md](docs/architecture.md) for the full diagram and data flow.
 
-```
-                  Artisan (voice + one photo)
-                            |
-                   React Native App (Expo)
-              12-language voice UI, capture, TTS
-                            |
-                     FastAPI backend
-                            |
-     +---------+----------+----------+-----------+
-     |         |          |          |           |
-   Vision   Background  Speech->   Listing     Pricing
-  (SigLIP)   removal     text     (Claude)   (embeddings
-             (rembg)   (Whisper)              + cost floor)
-     |         |          |          |           |
-     +---------+----------+----------+-----------+
-                            |
-                       PostgreSQL
-                            |
-          Publish to ONDC / GeM / WhatsApp
-```
-
 ---
 
 ## 7. Repository Structure
 
-```
-chhaap/
-├── README.md                 # this file
-├── SUBMISSION_GUIDE.md        # how this repo maps to the SIH template
+Chhaap ships two independently runnable parts, a Python backend and an Expo mobile app, so the layout branches from the standard single-`src/` template into `backend/` and `app/`. See [SUBMISSION_GUIDE.md](SUBMISSION_GUIDE.md) for the full "what goes where" table.
+
+```text
+SIH-SUBMISSION-Chhaap-App/
+├── README.md
+├── SUBMISSION_GUIDE.md
+├── LICENSE
+├── requirements.txt
 ├── submission/
-│   ├── PRESENTATION.md        # link + summary of the final PPT
-│   └── DEMO.md                # demo video link + run-through script
+│   ├── PRESENTATION.md
+│   ├── DEMO.md
+│   ├── Chhaap-SIH2026-Idea.pptx
+│   └── Demo.mp4
+├── backend/
+│   ├── app/            # FastAPI app (main.py, schemas.py)
+│   ├── ml/              # classification, pricing, listing, voice, photo models
+│   ├── sql/              # init.sql
+│   ├── tests/
+│   ├── docker-compose.yml
+│   ├── Dockerfile
+│   └── requirements.txt
+├── app/                # React Native / Expo mobile app
+│   ├── App.js
+│   ├── i18n.js
+│   └── assets/
 ├── docs/
-│   └── architecture.md        # system design, data flow, ML details
-├── backend/                   # FastAPI + ML service (you add this)
-├── app/                       # React Native / Expo app (you add this)
-├── assets/
-│   └── screenshots/           # UI screenshots, demo stills
-├── requirements.txt           # backend Python dependencies
-├── .gitignore
-└── LICENSE
+│   └── architecture.md
+└── assets/
+    └── screenshots/
 ```
 
 ---
 
-## 8. Installation
+## 8. Final Presentation
 
-**Prerequisites:** Python 3.10+, Node.js 18+, Docker Desktop, and an Anthropic API key.
+The final SIH presentation is in [submission/Chhaap-SIH2026-Idea.pptx](submission/Chhaap-SIH2026-Idea.pptx).
 
-**Backend**
+See [submission/PRESENTATION.md](submission/PRESENTATION.md) for the pointer file and, if the PPT ever outgrows GitHub, the fallback Drive/OneDrive link.
+
+---
+
+## 9. Demo Video
+
+The product demo is embedded at the top of this README, and the source file is [submission/Demo.mp4](submission/Demo.mp4).
+
+See [submission/DEMO.md](submission/DEMO.md) for the video link and a walkthrough of what it covers.
+
+---
+
+## 10. Screenshots / Prototype Photos
+
+Important screens and results live in [assets/screenshots/](assets/screenshots/). See [assets/screenshots/README.md](assets/screenshots/README.md) for naming conventions.
+
+---
+
+## 11. Installation
+
 ```bash
-cd backend
-pip install -r ../requirements.txt
-# start the database
-docker compose up -d
-# set your key (PowerShell)
-$env:ANTHROPIC_API_KEY="your-key-here"
-# run the API, bound so a phone on the same network can reach it
-python -m uvicorn main:app --host 0.0.0.0 --reload
+git clone <YOUR_REPOSITORY_URL>
+cd SIH-SUBMISSION-Chhaap-App
 ```
 
-**App**
+**Backend**
+
+```bash
+cd backend
+pip install -r requirements.txt
+docker compose up -d          # starts the pgvector-backed Postgres DB
+```
+
+**Mobile app**
+
 ```bash
 cd app
 npm install
-npx expo start -c
 ```
-Scan the QR code with Expo Go on a phone connected to the same Wi-Fi. If the phone cannot reach the dev server, start with `npx expo start -c --tunnel`.
-
-> On the demo phone, install the text-to-speech voice data for each language you will show: Settings -> System -> Languages & input -> Text-to-speech output -> install voice data.
 
 ---
 
-## 9. Run (demo boot order)
+## 12. Run
 
-1. Open Docker Desktop and wait for it to be ready.
-2. Start the database container.
-3. Set `ANTHROPIC_API_KEY` in the PowerShell window you will run the API from.
-4. Start the backend with `--host 0.0.0.0`.
-5. Start Expo and open the app on the phone.
+```bash
+# 1. Start Docker Desktop, then bring up the DB container
+docker compose -f backend/docker-compose.yml up -d
 
----
+# 2. Set the Anthropic API key for this shell (never commit it)
+# PowerShell:  $env:ANTHROPIC_API_KEY = "sk-..."
+# macOS/Linux: export ANTHROPIC_API_KEY="sk-..."
 
-## 10. Future Scope
+# 3. Run the backend
+cd backend
+uvicorn main:app --reload --host 0.0.0.0
 
-- **Learning alongside artisans.** Every time an artisan confirms or corrects a craft suggestion, we save that verified piece so the system grows smarter alongside the community over time.
-- **Wider language coverage via Bhashini.** Route languages without a strong speech model (like Odia today) through Bhashini for state-backed, ever-improving Indian-language speech support.
-- **Real channel analytics.** Replace the illustrative reach figures with live data directly from ONDC and GeM once seller onboarding is complete.
-- **Offline-first capture.** Allow artisans to snap photos and record details even without an internet connection, automatically uploading their listings as soon as they get signal back.
-- **Logistics and payments.** Close the loop completely by integrating local pickup scheduling and direct, transparent bank payouts for every maker.
+# 4. Run the mobile app
+cd ../app
+npx expo start          # add --tunnel if the phone can't reach the dev server directly
+```
 
----
-
-## Note on responsible framing
-
-Reach and channel figures shown in the current build are illustrative, clearly labeled as such in the app, and stand in for analytics that require completed marketplace onboarding. Nothing in this repository contains credentials, API keys, or personal data.
+Scan the Expo QR code with Expo Go, or run on an emulator. See [backend/README.md](backend/README.md) for the full API contract and the stub-to-real-model swap plan used during the build.
 
 ---
 
-<div align="center">
+## 13. Future Scope
 
-*Every artisan already has a mark. Chhaap helps the country see it.*
+- **Bhashini partnership for Odia voice input** - Odia currently transcribes through the Hindi model; a Bhashini integration would close this gap for a genuinely 12-language voice pipeline.
+- **Simulated live ad feed** - a real-time view of a published listing reaching ONDC, GeM, and WhatsApp channels, beyond the current one-tap publish.
+- **On-device voice packs for offline demos** - bundling TTS voice data so the app doesn't depend on the demo device already having a language's voice installed.
+- **A clean reset/start-over path** for repeatable demos and pilots without manual state cleanup.
+- **Expanding the pricing comparables corpus** beyond the seed dataset as more artisans and categories onboard, to keep price suggestions well-grounded.
 
-</div>
+## Important
+
+Before submission, make sure the repository is accessible to reviewers. Do **not** upload passwords, API keys, access tokens, `.env` files containing secrets, or other confidential credentials. The Anthropic API key in particular must only ever be set as a runtime environment variable, never committed - see the security reminder in [SUBMISSION_GUIDE.md](SUBMISSION_GUIDE.md).
