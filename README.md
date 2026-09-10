@@ -149,14 +149,14 @@ See [submission/DEMO.md](submission/DEMO.md) for the video link and a walkthroug
 
 ## 10. Screenshots / Prototype Photos
 
-Important screens and results live in [assets/screenshots/](assets/screenshots/). See [assets/screenshots/README.md](assets/screenshots/README.md) for naming conventions.
+Important screens and results live in [assets/screenshots/](assets/screenshots/). 
 
 ---
 
 ## 11. Installation
 
 ```bash
-git clone <YOUR_REPOSITORY_URL>
+git clone https://github.com/akshayvr-programmer/SIH-SUBMISSION-Chhaap-App.git
 cd SIH-SUBMISSION-Chhaap-App
 ```
 
@@ -208,6 +208,4 @@ Scan the Expo QR code with Expo Go, or run on an emulator. See [backend/README.m
 - **A clean reset/start-over path** for repeatable demos and pilots without manual state cleanup.
 - **Expanding the pricing comparables corpus** beyond the seed dataset as more artisans and categories onboard, to keep price suggestions well-grounded.
 
-## Important
 
-Before submission, make sure the repository is accessible to reviewers. Do **not** upload passwords, API keys, access tokens, `.env` files containing secrets, or other confidential credentials. The Anthropic API key in particular must only ever be set as a runtime environment variable, never committed - see the security reminder in [SUBMISSION_GUIDE.md](SUBMISSION_GUIDE.md).
