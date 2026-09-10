@@ -208,6 +208,4 @@ Scan the Expo QR code with Expo Go, or run on an emulator. See [backend/README.m
 - **A clean reset/start-over path** for repeatable demos and pilots without manual state cleanup.
 - **Expanding the pricing comparables corpus** beyond the seed dataset as more artisans and categories onboard, to keep price suggestions well-grounded.
 
-## Important
 
-Before submission, make sure the repository is accessible to reviewers. Do **not** upload passwords, API keys, access tokens, `.env` files containing secrets, or other confidential credentials. The Anthropic API key in particular must only ever be set as a runtime environment variable, never committed - see the security reminder in [SUBMISSION_GUIDE.md](SUBMISSION_GUIDE.md).
