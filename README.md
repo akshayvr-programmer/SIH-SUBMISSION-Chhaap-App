@@ -8,6 +8,16 @@ An AI market-linkage app that lets marginalized artisans list, price, and sell t
 
 Smart India Hackathon 2026 - PS **SIH26090** - Ministry of Social Justice & Empowerment
 
+---
+
+### 🎬 Product Demo
+
+<video src="submission/DEMO.mp4" width="100%" controls poster="assets/screenshots/demo_thumbnail.png">
+  Your browser does not support the video tag. You can <a href="submission/DEMO.mp4">download the demo video here</a>.
+</video>
+
+*Watch how Chhaap turns a single photo and a spoken sentence into a published, multi-channel listing.*
+
 </div>
 
 ---
@@ -81,108 +91,3 @@ The interface speaks and reads back at every step, making it effortless for arti
 ## 6. Architecture
 
 See [docs/architecture.md](docs/architecture.md) for the full diagram and data flow.
-
-```
-                  Artisan (voice + one photo)
-                            |
-                   React Native App (Expo)
-              12-language voice UI, capture, TTS
-                            |
-                     FastAPI backend
-                            |
-     +---------+----------+----------+-----------+
-     |         |          |          |           |
-   Vision   Background  Speech->   Listing     Pricing
-  (SigLIP)   removal     text     (Claude)   (embeddings
-             (rembg)   (Whisper)              + cost floor)
-     |         |          |          |           |
-     +---------+----------+----------+-----------+
-                            |
-                       PostgreSQL
-                            |
-          Publish to ONDC / GeM / WhatsApp
-```
-
----
-
-## 7. Repository Structure
-
-```
-chhaap/
-├── README.md                 # this file
-├── SUBMISSION_GUIDE.md        # how this repo maps to the SIH template
-├── submission/
-│   ├── PRESENTATION.md        # link + summary of the final PPT
-│   └── DEMO.md                # demo video link + run-through script
-├── docs/
-│   └── architecture.md        # system design, data flow, ML details
-├── backend/                   # FastAPI + ML service (you add this)
-├── app/                       # React Native / Expo app (you add this)
-├── assets/
-│   └── screenshots/           # UI screenshots, demo stills
-├── requirements.txt           # backend Python dependencies
-├── .gitignore
-└── LICENSE
-```
-
----
-
-## 8. Installation
-
-**Prerequisites:** Python 3.10+, Node.js 18+, Docker Desktop, and an Anthropic API key.
-
-**Backend**
-```bash
-cd backend
-pip install -r ../requirements.txt
-# start the database
-docker compose up -d
-# set your key (PowerShell)
-$env:ANTHROPIC_API_KEY="your-key-here"
-# run the API, bound so a phone on the same network can reach it
-python -m uvicorn main:app --host 0.0.0.0 --reload
-```
-
-**App**
-```bash
-cd app
-npm install
-npx expo start -c
-```
-Scan the QR code with Expo Go on a phone connected to the same Wi-Fi. If the phone cannot reach the dev server, start with `npx expo start -c --tunnel`.
-
-> On the demo phone, install the text-to-speech voice data for each language you will show: Settings -> System -> Languages & input -> Text-to-speech output -> install voice data.
-
----
-
-## 9. Run (demo boot order)
-
-1. Open Docker Desktop and wait for it to be ready.
-2. Start the database container.
-3. Set `ANTHROPIC_API_KEY` in the PowerShell window you will run the API from.
-4. Start the backend with `--host 0.0.0.0`.
-5. Start Expo and open the app on the phone.
-
----
-
-## 10. Future Scope
-
-- **Learning alongside artisans.** Every time an artisan confirms or corrects a craft suggestion, we save that verified piece so the system grows smarter alongside the community over time.
-- **Wider language coverage via Bhashini.** Route languages without a strong speech model (like Odia today) through Bhashini for state-backed, ever-improving Indian-language speech support.
-- **Real channel analytics.** Replace the illustrative reach figures with live data directly from ONDC and GeM once seller onboarding is complete.
-- **Offline-first capture.** Allow artisans to snap photos and record details even without an internet connection, automatically uploading their listings as soon as they get signal back.
-- **Logistics and payments.** Close the loop completely by integrating local pickup scheduling and direct, transparent bank payouts for every maker.
-
----
-
-## Note on responsible framing
-
-Reach and channel figures shown in the current build are illustrative, clearly labeled as such in the app, and stand in for analytics that require completed marketplace onboarding. Nothing in this repository contains credentials, API keys, or personal data.
-
----
-
-<div align="center">
-
-*Every artisan already has a mark. Chhaap helps the country see it.*
-
-</div>
