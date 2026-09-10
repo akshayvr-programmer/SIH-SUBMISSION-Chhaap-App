@@ -149,7 +149,7 @@ See [submission/DEMO.md](submission/DEMO.md) for the video link and a walkthroug
 
 ## 10. Screenshots / Prototype Photos
 
-Important screens and results live in [assets/screenshots/](assets/screenshots/). See [assets/screenshots/README.md](assets/screenshots/README.md) for naming conventions.
+Important screens and results live in [assets/screenshots/](assets/screenshots/). 
 
 ---
 
