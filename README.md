@@ -1,3 +1,7 @@
+
+
+
+
 <div align="center">
 
 # छाप · Chhaap
@@ -12,9 +16,8 @@ Smart India Hackathon 2026 - PS **SIH26090** - Ministry of Social Justice & Empo
 
 ### 🎬 Product Demo
 
-<video src="submission/DEMO.mp4" width="100%" controls poster="assets/screenshots/demo_thumbnail.png">
-  Your browser does not support the video tag. You can <a href="submission/DEMO.mp4">download the demo video here</a>.
-</video>
+https://github.com/user-attachments/assets/bcf6f26e-0c60-4d6f-b981-cfe5cb8b9f33
+
 
 *Watch how Chhaap turns a single photo and a spoken sentence into a published, multi-channel listing.*
 
