@@ -156,7 +156,7 @@ Important screens and results live in [assets/screenshots/](assets/screenshots/)
 ## 11. Installation
 
 ```bash
-git clone <YOUR_REPOSITORY_URL>
+git clone https://github.com/akshayvr-programmer/SIH-SUBMISSION-Chhaap-App.git
 cd SIH-SUBMISSION-Chhaap-App
 ```
 
