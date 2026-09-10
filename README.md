@@ -1,5 +1,4 @@
 <div align="center">
-
 # छाप · Chhaap
 
 **Speak your craft. Reach the country.**
@@ -8,15 +7,13 @@ An AI market-linkage app that lets marginalized artisans list, price, and sell t
 
 Smart India Hackathon 2026 · PS **SIH26090** · Ministry of Social Justice & Empowerment
 
-</div>
-
 ---
 
 ## 1. Project Information
 
 | | |
 |---|---|
-| **Project Title** | Chhaap — AI Market-Linkage for Artisans |
+| **Project Title** | Chhaap - AI Market-Linkage for Artisans |
 | **PS ID** | SIH26090 |
 | **PS Title** | AI-based market linkage and digital enablement for marginalized artisans |
 | **Category** | Software |
@@ -39,12 +36,12 @@ Chhaap removes the wall by turning the whole listing process into a conversation
 
 The artisan takes one photo and speaks. Chhaap does the rest:
 
-1. **Sees the craft** — an on-device vision model recognizes the craft type and proposes it; the artisan confirms or corrects, so the human always has the final say.
-2. **Cleans the photo** — background removal turns a phone snapshot into a clean catalogue image.
-3. **Listens** — the artisan describes the piece by voice, in their language.
-4. **Writes the listing** — a language model turns that speech into a polished product listing, returned in the artisan's own language.
-5. **Prices it fairly** — the piece is embedded and compared against a reference set to suggest a market-aware price, with a clear cost floor so the artisan never sells below materials plus labour.
-6. **Publishes everywhere** — the listing goes out to ONDC, GeM, and WhatsApp, and the artisan watches it reach buyers.
+1. **Sees the craft** - an on-device vision model recognizes the craft type and proposes it; the artisan confirms or corrects, so the human always has the final say.
+2. **Cleans the photo** - background removal turns a phone snapshot into a clean catalogue image.
+3. **Listens** - the artisan describes the piece by voice, in their language.
+4. **Writes the listing** - a language model turns that speech into a polished product listing, returned in the artisan's own language.
+5. **Prices it fairly** - the piece is embedded and compared against a reference set to suggest a market-aware price, with a clear cost floor so the artisan never sells below materials plus labour.
+6. **Publishes everywhere** - the listing goes out to ONDC, GeM, and WhatsApp, and the artisan watches it reach buyers.
 
 The interface speaks and reads back at every step, so it works for an artisan who cannot read. Nothing on the artisan-facing path requires typing.
 
@@ -52,7 +49,7 @@ The interface speaks and reads back at every step, so it works for an artisan wh
 
 ## 4. Key Features
 
-- **Voice-first, 12 Indian languages.** Full interface and spoken prompts in Hindi, English, Bengali, Marathi, Telugu, Tamil, Gujarati, Kannada, Malayalam, Punjabi, Odia, and Assamese — 105 translated strings per language.
+- **Voice-first, 12 Indian languages.** Full interface and spoken prompts in Hindi, English, Bengali, Marathi, Telugu, Tamil, Gujarati, Kannada, Malayalam, Punjabi, Odia, and Assamese - 105 translated strings per language.
 - **Photo to catalogue image.** Automatic background removal and enhancement from a single phone photo.
 - **AI craft recognition with human confirmation.** The model proposes the craft; the artisan decides. The classifier never overrides the maker.
 - **Voice-to-listing.** Speech in the artisan's language becomes a structured, sellable listing in that same language.
@@ -64,17 +61,18 @@ The interface speaks and reads back at every step, so it works for an artisan wh
 
 ## 5. Technology Stack
 
-**Frontend** — React Native (Expo). Voice capture, on-device recording, text-to-speech, custom typography, and view-to-image sharing.
+**Frontend** - React Native (Expo). Voice capture, on-device recording, text-to-speech, custom typography, and view-to-image sharing.
 
-**Backend** — Python, FastAPI, uvicorn. Containerized with Docker; PostgreSQL for persistence.
+**Backend** - Python, FastAPI, uvicorn. Containerized with Docker; PostgreSQL for persistence.
 
 **Machine Learning**
-- Vision — SigLIP image embeddings for craft classification and price comparables.
-- Background removal — rembg (ONNX Runtime, GPU-accelerated).
-- Speech-to-text — Whisper (faster-whisper), GPU inference.
-- Listing generation — Anthropic Claude.
 
-**Localization** — Custom i18n layer, 12 languages, with a graceful fallback chain and locale-aware speech.
+- Vision - SigLIP image embeddings for craft classification and price comparables.
+- Background removal - rembg (ONNX Runtime, GPU-accelerated).
+- Speech-to-text - Whisper (faster-whisper), GPU inference.
+- Listing generation - Anthropic Claude.
+
+**Localization** - Custom i18n layer, 12 languages, with a graceful fallback chain and locale-aware speech.
 
 ---
 
@@ -82,7 +80,7 @@ The interface speaks and reads back at every step, so it works for an artisan wh
 
 See [docs/architecture.md](docs/architecture.md) for the full diagram and data flow.
 
-```
+```text
                  Artisan (voice + one photo)
                           |
                  React Native App (Expo)
@@ -107,7 +105,7 @@ See [docs/architecture.md](docs/architecture.md) for the full diagram and data f
 
 ## 7. Repository Structure
 
-```
+```text
 chhaap/
 ├── README.md                 # this file
 ├── SUBMISSION_GUIDE.md        # how this repo maps to the SIH template
@@ -132,6 +130,7 @@ chhaap/
 **Prerequisites:** Python 3.10+, Node.js 18+, Docker Desktop, and an Anthropic API key.
 
 **Backend**
+
 ```bash
 cd backend
 pip install -r ../requirements.txt
@@ -144,11 +143,13 @@ python -m uvicorn main:app --host 0.0.0.0 --reload
 ```
 
 **App**
+
 ```bash
 cd app
 npm install
 npx expo start -c
 ```
+
 Scan the QR code with Expo Go on a phone connected to the same Wi-Fi. If the phone cannot reach the dev server, start with `npx expo start -c --tunnel`.
 
 > On the demo phone, install the text-to-speech voice data for each language you will show: Settings → System → Languages & input → Text-to-speech output → install voice data.
@@ -167,7 +168,7 @@ Scan the QR code with Expo Go on a phone connected to the same Wi-Fi. If the pho
 
 ## 10. Future Scope
 
-- **Learning from artisans.** Every time an artisan confirms or corrects the craft, store that verified example so the classifier gets better over time — a human-in-the-loop flywheel rather than a frozen model.
+- **Learning from artisans.** Every time an artisan confirms or corrects the craft, store that verified example so the classifier gets better over time - a human-in-the-loop flywheel rather than a frozen model.
 - **Wider language coverage via Bhashini.** Route languages without a strong speech model (Odia today) through Bhashini for state-backed, ever-improving Indian-language speech.
 - **Real channel analytics.** Replace the illustrative reach figures with live data from ONDC and GeM once seller onboarding is complete.
 - **Offline-first capture.** Let artisans capture and queue listings without connectivity, syncing when they reach a signal.
@@ -182,7 +183,4 @@ Reach and channel figures shown in the current build are illustrative, clearly l
 ---
 
 <div align="center">
-
 *Every artisan already has a mark. Chhaap helps the country see it.*
-
-</div>
