@@ -4,7 +4,7 @@ The product demo for **Chhaap** is embedded at the top of the main [README.md](.
 
 ## Demo video link
 
-`https://drive.google.com/file/d/1ouaxRV_hObKvBnMNRoTBvcW32I8D3lcC/view?usp=sharing` (optional external mirror - add if you want a lighter-weight link than the in-repo file)
+https://drive.google.com/file/d/1ouaxRV_hObKvBnMNRoTBvcW32I8D3lcC/view?usp=sharing (optional external mirror - add if you want a lighter-weight link than the in-repo file)
 
 ## What the video shows
 
